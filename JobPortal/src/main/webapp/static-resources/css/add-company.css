@@ -1,0 +1,86 @@
+.main-block {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.navigation-header {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+    background-color: dodgerblue;
+    overflow: hidden;
+    align-content: space-between;
+    align-items: center;
+    justify-content: right;
+    right: 20px;
+    z-index: 2;
+}
+
+.navigation-header a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    margin-left: 20px;
+}
+
+.navigation-header a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navigation-header a.active {
+    background-color: white;
+    color: dodgerblue;
+}
+
+input[type=text] {
+    width: 180px;
+    height: 10px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 5px;
+}
+
+.add-company-block {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 300px;
+    align-items: center;
+}
+
+.add-company-block div {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.formErrors {
+    color: red;
+}
+
+input[type=submit] {
+    margin-top: 5px;
+    padding: 10px;
+    width: 100px;
+    margin-bottom: 5px;
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    left: 30px;
+    cursor: pointer;
+}
