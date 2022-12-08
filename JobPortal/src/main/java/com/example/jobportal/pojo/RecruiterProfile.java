@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -49,7 +50,12 @@ public class RecruiterProfile {
     }
 
     public List<JobPosting> getJobsPosted() {
-        return jobsPosted;
+        ArrayList<JobPosting> l = new ArrayList<>();
+        for (JobPosting jobPosting: jobsPosted) {
+            jobPosting.getCompany().setBase64logoFile();
+            l.add(jobPosting);
+        }
+        return l;
     }
 
     public void setJobsPosted(List<JobPosting> jobsPosted) {

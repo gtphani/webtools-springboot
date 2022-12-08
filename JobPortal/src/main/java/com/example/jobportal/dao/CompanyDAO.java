@@ -33,7 +33,19 @@ public class CompanyDAO extends DAO{
             commit();
             return companies;
         } catch (HibernateException e) {
-            throw new Exception("Error while retrieving list of companies");
+            throw new Exception("Error while retrieving list of companies " + e.getMessage());
+        }
+    }
+
+    public Company getCompanyById(int companyId) throws Exception {
+        try {
+            begin();
+            Session session = getSession();
+            Company company = session.createQuery("from Company where id = " + companyId, Company.class).getSingleResult();
+            commit();
+            return company;
+        } catch (HibernateException e) {
+            throw new Exception("Error while retrieving list of companies " + e.getMessage());
         }
     }
 }

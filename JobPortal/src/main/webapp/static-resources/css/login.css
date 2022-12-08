@@ -10,10 +10,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    top: 10%;
-    width: 60%;
-    height: 100%;
+    width: 30%;
+    height: 90%;
     align-content: center;
+    justify-content: center;
     row-gap: 20px;
     column-gap: 10px;
 }
@@ -22,10 +22,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    top: 10%;
     width: 60%;
-    height: 100%;
+    height: 90%;
     align-content: center;
+    align-items: center;
+    justify-content: center;
     row-gap: 10px;
 }
 
@@ -67,6 +68,10 @@ input[type=password] {
     border-radius: 5px;
 }
 
+.formErrors {
+    color: red;
+}
+
 input[type=submit] {
     margin-top: 5px;
     padding: 10px;
@@ -77,4 +82,27 @@ input[type=submit] {
     border: none;
     border-radius: 4px;
     left: 30px;
+    cursor: pointer;
+}
+
+a:link, a:visited {
+    background-color: dodgerblue;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+a:hover, a:active {
+    background-color: dodgerblue;
+}
+
+.signup-links {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    justify-content: center;
 }

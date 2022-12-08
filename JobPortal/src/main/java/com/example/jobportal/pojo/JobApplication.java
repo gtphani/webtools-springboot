@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,6 +45,10 @@ public class JobApplication {
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private byte[] resume;
 
     @Column(updatable = false)
     @CreationTimestamp
@@ -91,4 +96,11 @@ public class JobApplication {
         return updatedAt;
     }
 
+    public byte[] getResume() {
+        return resume;
+    }
+
+    public void setResume(byte[] resume) {
+        this.resume = resume;
+    }
 }

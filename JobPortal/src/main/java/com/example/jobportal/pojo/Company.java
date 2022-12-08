@@ -22,7 +22,7 @@ public class Company {
     private String name;
 
     @Lob
-    @Column(columnDefinition = "BLOB")
+    @Column(columnDefinition = "MEDIUMBLOB")
     private byte[] logo;
 
     @Transient

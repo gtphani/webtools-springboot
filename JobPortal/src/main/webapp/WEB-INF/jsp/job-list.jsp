@@ -1,8 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login/Signup</title>
-    <link rel="stylesheet" href="/css/job-list.css" />
+    <title>Opportunities List</title>
+    <link href="<c:url value="/static-resources/css/job-list.css" />" rel="stylesheet">
   </head>
   <body>
     <div class="main-block">
@@ -13,44 +18,39 @@
         <div>
           <form action="">
             <input type="text" placeholder="Job Title" name="search" />
-            <button type="submit" class="search-button">Search</button>
+            <input type="submit" class="search-button" value="Search">
           </form>
         </div>
         <div>
-          <a class="active-tab" href="#home">Job List</a>
+          <a href="http://localhost:8080/jobs/candidate/opportunities">Job List</a>
         </div>
         <div>
-          <a href="#home">Applied</a>
+          <a href="http://localhost:8080/jobs/candidate/applications">Applied</a>
         </div>
         <div>
-          <a href="#home">Profile</a>
+          <a href="http://localhost:8080/jobs/candidate/profile">Profile</a>
         </div>
         <div>
-          <a href="#home">Logout</a>
+          <a href="http://localhost:8080/jobs/logout">Logout</a>
         </div>
       </div>
       <div class="job-list">
-        <div class="job-card">
-          <div class="job-card-logo">
-            <img src="/logos/salesforce_logo.png" alt="Mountain" />
+        <c:forEach var="job" items="${jobsPosted}">
+          <div onclick="location.href='http://localhost:8080/jobs/candidate/opportunity/${job.id}'" class="job-card">
+            <div class="job-card-logo">
+              <img src="data:image/jpeg;base64, ${job.company.base64logoFile}" alt="Mountain" />
+            </div>
+            <div class="job-card-basic-info">
+              <div class="job-card-title">${job.title}</div>
+              <div class="job-card-company">${job.company.name}</div>
+              <div class="job-card-location">${job.location}</div>
+            </div>
+            <div class="job-card-extra-info">
+              <div class="job-card-yoe">${job.experience}</div>
+              <div class="job-card-skills">${job.skills}</div>
+            </div>
           </div>
-          <div class="job-card-basic-info">
-            <div class="job-card-title">Software Developer</div>
-            <div class="job-card-company">Salesforce</div>
-            <div class="job-card-location">San Jose, CA</div>
-          </div>
-          <div class="job-card-extra-info">
-            <div class="job-card-yoe">1-3 years</div>
-            <div class="job-card-skills">Java, SpringBoot, Hibernate, SQL</div>
-          </div>
-        </div>
-        <div class="job-card"></div>
-        <div class="job-card"></div>
-        <div class="job-card"></div>
-        <div class="job-card"></div>
-        <div class="job-card"></div>
-        <div class="job-card"></div>
-        <div class="job-card"></div>
+        </c:forEach>
       </div>
     </div>
   </body>

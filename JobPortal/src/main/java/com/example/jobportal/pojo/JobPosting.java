@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,9 @@ public class JobPosting {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    @Transient
+    private boolean isApplied;
 
     public long getId() {
         return id;
@@ -124,10 +128,22 @@ public class JobPosting {
     }
 
     public List<JobApplication> getApplicantList() {
+        for (JobApplication application: applicantList) {
+            application.getCandidate().getUser().setBase64AvatarFile();
+        }
         return applicantList;
     }
 
     public void setApplicantList(List<JobApplication> applicantList) {
         this.applicantList = applicantList;
+    }
+
+
+    public boolean getIsApplied() {
+        return isApplied;
+    }
+
+    public void setIsApplied(boolean applied) {
+        isApplied = applied;
     }
 }

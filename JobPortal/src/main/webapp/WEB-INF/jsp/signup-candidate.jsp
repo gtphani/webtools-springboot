@@ -1,45 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Signup candidate</title>
-    <link rel="stylesheet" href="/login.css" />
+    <link href="<c:url value="/static-resources/css/signup.css" />" rel="stylesheet">
 </head>
 <body>
 <div class="main-block">
     <div class="signup-block">
         <h1>Signup to explore new opportunities</h1>
-        <form:form action="/candidate/signup" method="post" modelAttribute="">
+        <%--@elvariable id="user" type="com.example.jobportal.pojo.User"--%>
+        <form:form action="/jobs/candidate/signup" method="post" modelAttribute="user">
             <div class="nameblock">
-                <form:label for="firstname" path="firstname">First Name:</form:label>
-                <form:input type="text" id="firstname" name="firstname" path="firstname"/>
-                <form:label for="lastname" path="lastname">Last Name:</form:label>
-                <form:input type="text" id="lastname" name="lastname" path="lastname"/>
+                <form:label for="firstname" path="firstName">FirstName</form:label>
+                <form:input path="firstName" name="firstname" id="firstname" /> <form:errors cssClass="formErrors" path="firstName"/>
+                <form:label for="lastname" path="lastName">LastName</form:label>
+                <form:input path="lastName" name="lastname" id="lastname" /> <form:errors cssClass="formErrors" path="lastName"/>
             </div>
             <div>
-                <form:label for="email" path="email">Email:</form:label>
-                <form:input type="text" id="email" name="email" path="email"/>
+                <form:label for="email" path="email">Email</form:label>
+                <form:input path="email" name="email" id="email" /> <form:errors cssClass="formErrors" path="email"/>
             </div>
             <div>
-                <form:label for="signup-password" path="signup-password">Password:</form:label>
+                <form:label for="password" path="password">Password:</form:label>
                 <form:input
                         type="password"
-                        id="signup-password"
-                        name="signup-password"
-                        path="signup-password"
-                />
+                        id="password"
+                        name="password"
+                        path="password"
+                /> <form:errors cssClass="formErrors" path="password"/>
             </div>
             <div>
-                <form:label for="signup-confirm-password" path="signup-confirm-password">Confirm Password:</form:label>
+                <form:label for="confirmPassword" path="confirmPassword">Confirm Password:</form:label>
                 <form:input
                         type="password"
-                        id="signup-confirm-password"
-                        name="signup-confirm-password"
-                        path="signup-confirm-password"
-                />
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        path="confirmPassword"
+                /> <form:errors cssClass="formErrors" path="confirmPassword"/>
             </div>
             <input type="submit" value="Sign up" />
         </form:form>

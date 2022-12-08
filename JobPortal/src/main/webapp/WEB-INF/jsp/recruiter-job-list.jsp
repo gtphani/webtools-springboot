@@ -20,16 +20,7 @@
 <div class="main-block">
     <div class="navigation-header">
         <div class="search-jobs-label">
-            <h1>Explore opportunities</h1>
-        </div>
-        <div>
-            <form action="">
-                <input type="text" placeholder="Job Title" name="search" />
-                <button type="submit" class="search-button">Search</button>
-            </form>
-        </div>
-        <div>
-            <a class="active-tab" href="#home">Job List</a>
+            <h1>${recruiter.user.firstName}, Manage job opportunities at ${recruiter.company.name}</h1>
         </div>
         <div>
             <a href="http://localhost:8080/jobs/recruiter/create-job">Create New Job</a>
@@ -44,7 +35,7 @@
     <%--@elvariable id="company" type="com.example.jobportal.pojo.JobPosting"--%>
     <div class="job-list">
         <c:forEach var="job" items="${jobsPosted}">
-            <div onclick="location.href='http://localhost:8080/jobs/detail/${job.id}'" class="job-card">
+            <div onclick="location.href='http://localhost:8080/jobs/recruiter/posting/${job.id}'" class="job-card">
                 <div class="job-card-logo">
                     <img src="data:image/jpeg;base64, ${job.company.base64logoFile}" alt="Mountain" />
                 </div>

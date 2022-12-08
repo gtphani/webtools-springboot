@@ -29,7 +29,7 @@ public class UserSignupValidator implements Validator {
             errors.rejectValue("password", "field.min.length", new Object[]{Integer.valueOf(MINIMUM_PASSWORD_LENGTH)}, "The password must be at least [" + MINIMUM_PASSWORD_LENGTH + "] characters in length.");
         }
 
-        if (user.getPassword() != null && user.getConfirmPassword() !=null && user.getPassword().equals(user.getConfirmPassword())) {
+        if (user.getPassword() != null && user.getConfirmPassword() !=null && !user.getPassword().equals(user.getConfirmPassword())) {
             errors.rejectValue("password", "field.min.length", "Passwords do not match");
         }
     }

@@ -1,7 +1,7 @@
 package com.example.jobportal.pojo;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.tuple.GenerationTiming;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
@@ -55,13 +55,16 @@ public class User {
     private RecruiterProfile recruiterProfile;
 
     @Lob
-    @Column(columnDefinition = "BLOB")
+    @Column(columnDefinition = "MEDIUMBLOB")
     private byte[] avatar;
 
     @Column(updatable = false)
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @Transient
+    private String base64AvatarFile;
 
     public long getId() {
         return id;
@@ -145,5 +148,13 @@ public class User {
 
     public void setRecruiterProfile(RecruiterProfile recruiterProfile) {
         this.recruiterProfile = recruiterProfile;
+    }
+
+    public String getBase64AvatarFile() {
+        return base64AvatarFile;
+    }
+
+    public void setBase64AvatarFile() {
+        this.base64AvatarFile = new Base64().encodeToString(this.avatar);
     }
 }

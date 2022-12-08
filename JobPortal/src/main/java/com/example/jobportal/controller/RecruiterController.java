@@ -42,16 +42,18 @@ public class RecruiterController {
     }
 
     @GetMapping("/recruiter/posted-jobs")
-    public String getPostedJobs(ModelMap model, HttpServletRequest request) {
+    public String getPostedJobs(ModelMap model, User user, HttpServletRequest request) {
+        model.addAttribute("user", user);
         try {
             String userEmail = (String) request.getSession().getAttribute("loggedinUser");
             if (userEmail == null) return "redirect:/login";
             RecruiterProfile recruiterProfile = userDAO.getUserByEmail(userEmail).getRecruiterProfile();
+            model.addAttribute("recruiter", recruiterProfile);
             model.addAttribute("jobsPosted", recruiterProfile.getJobsPosted());
         } catch (Exception e) {
             System.out.println("Job list could not be retrieved: " + e.getMessage());
         }
-        return "signup-recruiter";
+        return "recruiter-job-list";
     }
 
     @GetMapping("/recruiter/signup")
@@ -66,12 +68,18 @@ public class RecruiterController {
     }
 
     @PostMapping("/recruiter/signup")
-    public String signupPost(@ModelAttribute("user") User user, BindingResult result, SessionStatus status, HttpServletRequest request) {
+    public String signupPost(ModelMap model, @ModelAttribute("user") User user, BindingResult result, SessionStatus status, HttpServletRequest request) {
         try {
             userSignupValidator.validate(user, result);
-            if (result.hasErrors()) return "signup-recruiter";
+            if (result.hasErrors()){
+                model.addAttribute("companies", companyDAO.getCompanies());
+                return "signup-recruiter";
+            }
+
             user.setUserType(User.UserType.RECRUITER);
             RecruiterProfile recruiterProfile = new RecruiterProfile();
+            recruiterProfile.setCompany(companyDAO.getCompanyById(Integer.parseInt(request.getParameter("company"))));
+
             userDAO.saveRecruiter(user, recruiterProfile);
         } catch (Exception e) {
             System.out.println("User cannot be Added: " + e.getMessage());

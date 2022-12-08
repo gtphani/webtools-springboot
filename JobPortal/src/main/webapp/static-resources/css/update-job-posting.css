@@ -21,8 +21,6 @@ img {
     overflow: hidden;
     align-content: space-between;
     align-items: center;
-    justify-content: right;
-    right: 20px;
     z-index: 2;
 }
 
@@ -47,6 +45,14 @@ img {
     color: dodgerblue;
 }
 
+.navigation-header button {
+    background-color: white;
+    color: dodgerblue;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 300px;
+}
+
 input[type=text] {
     width: 180px;
     height: 10px;
@@ -55,7 +61,7 @@ input[type=text] {
     border-radius: 5px;
 }
 
-.job-description-block input {
+.job-description-block textarea {
     height: 500px;
     width: 400px;
 }
@@ -105,6 +111,7 @@ input[type=text] {
     margin-top: 10px;
     margin-bottom: 10px;
     align-items: center;
+    cursor: pointer;
 }
 
 .applicant-individual-block div {
@@ -117,4 +124,11 @@ input[type=text] {
 
 .applied-on {
     color: gray;
+}
+
+.search-jobs-label {
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 50px;
+    margin-right: 5px;
 }
