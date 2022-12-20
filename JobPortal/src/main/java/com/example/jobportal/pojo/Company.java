@@ -49,7 +49,7 @@ public class Company {
     }
 
     public String getBase64logoFile() {
-        return base64logoFile;
+        return new Base64().encodeToString(this.logo);
     }
 
     public void setBase64logoFile() {

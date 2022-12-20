@@ -44,9 +44,6 @@ public class CompanyController {
             User user = userDAO.getUserByEmail(userEmail);
             if (!user.getUserType().equals(User.UserType.ADMIN)) return "redirect:/login";
             List<Company> companies = companyDAO.getCompanies();
-            for (Company company: companies) {
-                company.setBase64logoFile();
-            }
             model.addAttribute("companies", companies);
         } catch (Exception e) {
             System.out.println("Company list could not be retrieved: " + e.getMessage());

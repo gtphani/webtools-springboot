@@ -18,7 +18,24 @@ public class JobApplicationDAO extends DAO{
             commit();
         } catch (Exception e) {
             rollback();
+            e.printStackTrace();
             throw new Exception("Could not save application for candidate " + jobApplication.getCandidate(), e);
+        }
+    }
+
+    public JobApplication getApplicationById(long jobApplicationId) throws Exception{
+        try {
+            begin();
+            Session session = getSession();
+            String query = "from JobApplication JA where JA.id = :jobApplicationId";
+            JobApplication jobApplication = session.createQuery(
+                    query, JobApplication.class).setParameter("jobApplicationId", jobApplicationId).getSingleResult();
+            commit();
+            return jobApplication;
+        } catch (Exception e) {
+            rollback();
+            e.printStackTrace();
+            throw new Exception("Could not retrieve application " + jobApplicationId, e);
         }
     }
 
@@ -30,6 +47,7 @@ public class JobApplicationDAO extends DAO{
             commit();
         } catch (Exception e) {
             rollback();
+            e.printStackTrace();
             throw new Exception("Could not update application for candidate " + jobApplication.getCandidate(), e);
         }
     }

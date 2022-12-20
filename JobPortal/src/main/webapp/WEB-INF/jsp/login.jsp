@@ -10,6 +10,7 @@
     <link href="<c:url value="/static-resources/css/login.css" />" rel="stylesheet">
   </head>
   <body>
+  <h1>Welcome to Job board. Explore opportunities / Find talent</h1>
     <div class="main-block">
       <div class="signup-block">
         <div class="signup-links">

@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -70,8 +71,8 @@ public class CandidateProfile {
         this.preferredLocation = preferredLocation;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public String getUpdatedAt() {
+        return new SimpleDateFormat("k:mma, d MMM, y").format(updatedAt);
     }
 
     public void setUpdatedAt(Date updatedAt) {

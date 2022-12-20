@@ -21,6 +21,7 @@ public class CompanyDAO extends DAO{
             commit();
         } catch (HibernateException e) {
             rollback();
+            e.printStackTrace();
             throw new Exception("Could not save company " + company.getName(), e);
         }
     }
@@ -29,22 +30,28 @@ public class CompanyDAO extends DAO{
         try {
             begin();
             Session session = getSession();
-            List<Company> companies = session.createQuery("from Company", Company.class).list();
+            String query = "from Company";
+            List<Company> companies = session.createQuery(query, Company.class).list();
             commit();
             return companies;
         } catch (HibernateException e) {
+            rollback();
+            e.printStackTrace();
             throw new Exception("Error while retrieving list of companies " + e.getMessage());
         }
     }
 
-    public Company getCompanyById(int companyId) throws Exception {
+    public Company getCompanyById(long companyId) throws Exception {
         try {
             begin();
             Session session = getSession();
-            Company company = session.createQuery("from Company where id = " + companyId, Company.class).getSingleResult();
+            String query = "from Company where id = :companyId";
+            Company company = session.createQuery(query, Company.class).setParameter("companyId", companyId).getSingleResult();
             commit();
             return company;
         } catch (HibernateException e) {
+            rollback();
+            e.printStackTrace();
             throw new Exception("Error while retrieving list of companies " + e.getMessage());
         }
     }

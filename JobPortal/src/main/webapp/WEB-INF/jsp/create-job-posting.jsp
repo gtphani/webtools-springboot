@@ -42,23 +42,24 @@
                             placeholder="Software Developer"
                             name="title"
                             path="title"
+                            required="true"
                     />
                 </div>
                 <div class="job-location-block">
                     <form:label for="location" path="location">Job Location:</form:label>
-                    <form:input type="text" id="location" name="location" path="location"/>
+                    <form:input type="text" id="location" name="location" path="location" required="true"/>
                 </div>
                 <div class="job-yoe-block">
                     <form:label for="experience" path="">Experience Range:</form:label>
-                    <form:input type="text" id="experience" name="experience" path="experience"/>
+                    <form:input type="text" id="experience" name="experience" path="experience" required="true"/>
                 </div>
                 <div class="job-skills-block">
                     <form:label for="skills" path="skills">Job Skills:</form:label>
-                    <form:input type="text" id="skills" name="skills" path="skills"/>
+                    <form:input type="text" id="skills" name="skills" path="skills" required="true"/>
                 </div>
                 <div class="job-description-block">
                     <form:label for="description" path="description">Job Description:</form:label>
-                    <form:textarea type="text" id="description" name="description" path="description"/>
+                    <form:textarea type="text" id="description" name="description" path="description" required="true"/>
                 </div>
                 <input type="submit" value="Create Job" class="create-jobdetails">
             </div>

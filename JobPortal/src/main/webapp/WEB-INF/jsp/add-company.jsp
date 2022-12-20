@@ -26,7 +26,7 @@
             <a href="http://localhost:8080/jobs/admin/company-list">Companies</a>
         </div>
         <div>
-            <a href="http://localhost:8080/jobs/admin/logout">Logout</a>
+            <a href="http://localhost:8080/jobs/logout">Logout</a>
         </div>
     </div>
     <div class="add-company-block">
@@ -35,11 +35,11 @@
         <form:form action="/jobs/admin/onboard/" method="post" modelAttribute="company" enctype="multipart/form-data">
             <div>
                 <form:label for="name" path="name">Company Name</form:label>
-                <form:input path="name" name="name" id="name" /> &nbsp; <form:errors cssClass="formErrors" path="name"/>
+                <form:input path="name" name="name" id="name" required="true"/> &nbsp; <form:errors cssClass="formErrors" path="name"/>
             </div>
             <div>
                 <form:label for="logo" path="logo">Logo: </form:label>
-                <form:input type="file" id="logo" name="logo" path="logo"/> &nbsp; <form:errors cssClass="formErrors" path="logo"/>
+                <form:input type="file" id="logo" name="logo" path="logo" required="true"/> &nbsp; <form:errors cssClass="formErrors" path="logo"/>
             </div>
             <div>
                 <input type="submit" value="Onboard" />

@@ -18,5 +18,6 @@
         <mapping class="com.example.jobportal.pojo.Company" />
         <mapping class="com.example.jobportal.pojo.JobPosting" />
         <mapping class="com.example.jobportal.pojo.JobApplication" />
+        <mapping class="com.example.jobportal.pojo.ApplicationMessage" />
     </session-factory>
 </hibernate-configuration>

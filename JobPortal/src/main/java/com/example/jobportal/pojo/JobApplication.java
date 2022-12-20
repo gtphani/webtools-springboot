@@ -14,9 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @Entity(name = "JobApplication")
@@ -59,6 +62,9 @@ public class JobApplication {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
+    @OneToMany(mappedBy = "application")
+    private List<ApplicationMessage> messages;
+
     public long getId() {
         return id;
     }
@@ -88,12 +94,12 @@ public class JobApplication {
         this.status = status;
     }
 
-    public Date getApplieddAt() {
-        return applieddAt;
+    public String getApplieddAt() {
+        return new SimpleDateFormat("k:mma, d MMM, y").format(applieddAt);
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public String getUpdatedAt() {
+        return new SimpleDateFormat("k:mma, d MMM, y").format(updatedAt);
     }
 
     public byte[] getResume() {
@@ -102,5 +108,13 @@ public class JobApplication {
 
     public void setResume(byte[] resume) {
         this.resume = resume;
+    }
+
+    public List<ApplicationMessage> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<ApplicationMessage> messages) {
+        this.messages = messages;
     }
 }

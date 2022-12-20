@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.persistence.PostRemove;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -66,6 +67,9 @@ public class User {
     @Transient
     private String base64AvatarFile;
 
+    @Transient
+    private boolean isRecruiter;
+
     public long getId() {
         return id;
     }
@@ -84,6 +88,10 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getResumeName() {
+        return this.firstName + "_" + this.firstName + "_resume";
     }
 
     public UserType getUserType() {
@@ -151,10 +159,18 @@ public class User {
     }
 
     public String getBase64AvatarFile() {
-        return base64AvatarFile;
+        return new Base64().encodeToString(this.avatar);
     }
 
     public void setBase64AvatarFile() {
         this.base64AvatarFile = new Base64().encodeToString(this.avatar);
+    }
+
+    public boolean getIsRecruiter() {
+        return this.recruiterProfile != null;
+    }
+
+    public void setIsRecruiter(boolean recruiter) {
+        isRecruiter = recruiter;
     }
 }

@@ -50,12 +50,7 @@ public class RecruiterProfile {
     }
 
     public List<JobPosting> getJobsPosted() {
-        ArrayList<JobPosting> l = new ArrayList<>();
-        for (JobPosting jobPosting: jobsPosted) {
-            jobPosting.getCompany().setBase64logoFile();
-            l.add(jobPosting);
-        }
-        return l;
+        return jobsPosted;
     }
 
     public void setJobsPosted(List<JobPosting> jobsPosted) {

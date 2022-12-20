@@ -49,13 +49,13 @@
                   Updated at: ${jobApplication.updatedAt}
                 </div>
                 <div>
-                  <a class="apply-form" href="http://localhost:8080/jobs/candidate/applications/${jobApplication.id}">Go to Application</a>
+                  <a class="apply-form" href="http://localhost:8080/jobs/posting/${retrievedJobPosting.id}/applications/${jobApplication.id}">Go to Application</a>
                 </div>
               </c:when>
               <c:otherwise>
                 <form:form cssClass="apply-form" action="/jobs/candidate/opportunity/${retrievedJobPosting.id}/apply" method="post" enctype="multipart/form-data">
                   <label for="resume">Resume: </label>
-                  <input type="file" id="resume" name="resume">
+                  <input type="file" id="resume" name="resume" required>
                   <input type="submit" class="job-apply" value="Apply">
                 </form:form>
               </c:otherwise>

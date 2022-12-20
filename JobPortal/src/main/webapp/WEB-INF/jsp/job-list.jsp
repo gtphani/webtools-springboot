@@ -16,9 +16,9 @@
           <h1>Explore opportunities</h1>
         </div>
         <div>
-          <form action="">
-            <input type="text" placeholder="Job Title" name="search" />
-            <input type="submit" class="search-button" value="Search">
+          <form method="post" action="/jobs/candidate/opportunities/search">
+            <input type="text" placeholder="Job Title" name="search" id="search-input-text" />
+            <input type="submit" class="search-button" id="search-input-button" value="Search">
           </form>
         </div>
         <div>
@@ -48,6 +48,9 @@
             <div class="job-card-extra-info">
               <div class="job-card-yoe">${job.experience}</div>
               <div class="job-card-skills">${job.skills}</div>
+            </div>
+            <div class="job-card-timestamp">
+              ${job.createdAt}
             </div>
           </div>
         </c:forEach>

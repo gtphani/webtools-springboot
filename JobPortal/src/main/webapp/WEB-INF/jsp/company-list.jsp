@@ -20,7 +20,7 @@
             <a href="http://localhost:8080/jobs/admin/company-list">Companies</a>
         </div>
         <div>
-            <a href="http://localhost:8080/jobs/admin/logout">Logout</a>
+            <a href="http://localhost:8080/jobs/logout">Logout</a>
         </div>
     </div>
     <h1>Added companies list</h1>

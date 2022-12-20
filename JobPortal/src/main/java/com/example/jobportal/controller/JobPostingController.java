@@ -86,7 +86,7 @@ public class JobPostingController {
             String userEmail = (String) request.getSession().getAttribute("loggedinUser");
             if (userEmail == null) return "redirect:/login";
             RecruiterProfile recruiterProfile = userDAO.getUserByEmail(userEmail).getRecruiterProfile();
-            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingByRecruiterId(Integer.parseInt(jobPostingId), recruiterProfile.getId());
+            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingByRecruiterId(Long.parseLong(jobPostingId), recruiterProfile.getId());
             if (retrievedJobPosting == null) {
                 return "error-404";
             }
@@ -106,7 +106,7 @@ public class JobPostingController {
             String userEmail = (String) request.getSession().getAttribute("loggedinUser");
             if (userEmail == null) return "redirect:/login";
             RecruiterProfile recruiterProfile = userDAO.getUserByEmail(userEmail).getRecruiterProfile();
-            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingByRecruiterId(Integer.parseInt(jobPostingId), recruiterProfile.getId());
+            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingByRecruiterId(Long.parseLong(jobPostingId), recruiterProfile.getId());
             if (retrievedJobPosting == null) {
                 return "error-404";
             }
@@ -131,7 +131,7 @@ public class JobPostingController {
             String userEmail = (String) request.getSession().getAttribute("loggedinUser");
             if (userEmail == null) return "redirect:/login";
             CandidateProfile candidateProfile = userDAO.getUserByEmail(userEmail).getCandidateProfile();
-            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingById(Integer.parseInt(jobPostingId));
+            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingById(Long.parseLong(jobPostingId));
             if (retrievedJobPosting == null) {
                 return "error-404";
             }
@@ -164,11 +164,10 @@ public class JobPostingController {
             String userEmail = (String) request.getSession().getAttribute("loggedinUser");
             if (userEmail == null) return "redirect:/login";
             CandidateProfile candidateProfile = userDAO.getUserByEmail(userEmail).getCandidateProfile();
-            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingById(Integer.parseInt(jobPostingId));
+            JobPosting retrievedJobPosting = jobPostingDAO.getJobPostingById(Long.parseLong(jobPostingId));
             if (retrievedJobPosting == null) {
                 return "error-404";
             }
-            retrievedJobPosting.getCompany().setBase64logoFile();
             retrievedJobPosting.setIsApplied(true);
 
             JobApplication jobApplication = new JobApplication();

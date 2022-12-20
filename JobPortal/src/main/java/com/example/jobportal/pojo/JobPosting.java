@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -118,19 +119,16 @@ public class JobPosting {
         this.experience = experience;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public String getCreatedAt() {
+        return new SimpleDateFormat("d MMM, y").format(createdAt);
     }
 
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public String getUpdatedAt() {
+        return new SimpleDateFormat("k:mma, d MMM, y").format(updatedAt);
     }
 
     public List<JobApplication> getApplicantList() {
-        for (JobApplication application: applicantList) {
-            application.getCandidate().getUser().setBase64AvatarFile();
-        }
         return applicantList;
     }
 

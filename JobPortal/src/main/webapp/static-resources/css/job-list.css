@@ -95,7 +95,7 @@ img {
 .job-card-basic-info {
     position: relative;
     height: 80px;
-    width: 300px;
+    width: 250px;
     margin: 10px;
 }
 
@@ -136,4 +136,12 @@ img {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-left: 50px;
     margin-right: 5px;
+}
+
+.job-card-timestamp {
+    position: relative;
+    display: flex;
+    top: 25px;
+    font-size: 15px;
+    color: gray;
 }

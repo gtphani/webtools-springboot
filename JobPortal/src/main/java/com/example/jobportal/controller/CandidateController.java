@@ -33,7 +33,7 @@ public class CandidateController {
     }
 
     @Autowired
-    public CandidateController(UserDAO userDAO, UserSignupValidator userSignupValidator, JobPostingDAO jobPostingDAO) {
+    public CandidateController(UserSignupValidator userSignupValidator, JobPostingDAO jobPostingDAO, UserDAO userDAO) {
         this.userDAO = userDAO;
         this.userSignupValidator = userSignupValidator;
         this.jobPostingDAO = jobPostingDAO;
@@ -52,6 +52,10 @@ public class CandidateController {
             if (result.hasErrors()){
                 return "signup-candidate";
             }
+            if (userDAO.getUserByEmail(user.getEmail())!=null) {
+                result.rejectValue("email", "invalid-signup", "Account with this email already exists!");
+                return "signup-candidate";
+            }
             user.setUserType(User.UserType.CANDIDATE);
             CandidateProfile candidateProfile = new CandidateProfile();
             candidateProfile.setUser(user);
@@ -65,14 +69,30 @@ public class CandidateController {
     }
 
     @GetMapping("/candidate/opportunities")
-    public String opportunitiesListGet(ModelMap model, User user, HttpServletRequest request) {
+    public String opportunitiesListGet(ModelMap model, User user,
+                                       HttpServletRequest request) {
         model.addAttribute("user", user);
         try {
             String userEmail = (String) request.getSession().getAttribute("loggedinUser");
             if (userEmail == null) return "redirect:/login";
             CandidateProfile candidateProfile = userDAO.getUserByEmail(userEmail).getCandidateProfile();
             model.addAttribute("candidate", candidateProfile);
-            model.addAttribute("jobsPosted", jobPostingDAO.getAvailableJobPostings(candidateProfile));
+            model.addAttribute("jobsPosted", jobPostingDAO.getAvailableJobPostings(candidateProfile, null));
+        } catch (Exception e) {
+            System.out.println("Job list could not be retrieved: " + e.getMessage());
+        }
+        return "job-list";
+    }
+
+    @PostMapping("/candidate/opportunities/search")
+    public String opportunitiesListPost(ModelMap model, User user, HttpServletRequest request) {
+        model.addAttribute("user", user);
+        try {
+            String userEmail = (String) request.getSession().getAttribute("loggedinUser");
+            if (userEmail == null) return "redirect:/login";
+            CandidateProfile candidateProfile = userDAO.getUserByEmail(userEmail).getCandidateProfile();
+            model.addAttribute("candidate", candidateProfile);
+            model.addAttribute("jobsPosted", jobPostingDAO.getAvailableJobPostings(candidateProfile, request.getParameter("search")));
         } catch (Exception e) {
             System.out.println("Job list could not be retrieved: " + e.getMessage());
         }

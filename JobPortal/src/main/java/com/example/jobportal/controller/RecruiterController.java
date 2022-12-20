@@ -2,6 +2,7 @@ package com.example.jobportal.controller;
 
 import com.example.jobportal.dao.CompanyDAO;
 import com.example.jobportal.dao.UserDAO;
+import com.example.jobportal.pojo.Company;
 import com.example.jobportal.pojo.RecruiterProfile;
 import com.example.jobportal.pojo.User;
 import com.example.jobportal.validator.RecruiterProfileValidator;
@@ -75,13 +76,21 @@ public class RecruiterController {
                 model.addAttribute("companies", companyDAO.getCompanies());
                 return "signup-recruiter";
             }
+            if (userDAO.getUserByEmail(user.getEmail())!=null) {
+                model.addAttribute("companies", companyDAO.getCompanies());
+                result.rejectValue("email", "invalid-signup", "Account with this email already exists!");
+                return "signup-recruiter";
+            }
 
             user.setUserType(User.UserType.RECRUITER);
+            Company company = companyDAO.getCompanyById(Long.parseLong(request.getParameter("company")));
+            user.setAvatar(company.getLogo());
             RecruiterProfile recruiterProfile = new RecruiterProfile();
-            recruiterProfile.setCompany(companyDAO.getCompanyById(Integer.parseInt(request.getParameter("company"))));
+            recruiterProfile.setCompany(company);
 
             userDAO.saveRecruiter(user, recruiterProfile);
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("User cannot be Added: " + e.getMessage());
         }
         request.getSession().setAttribute("loggedinUser", user.getEmail());
